@@ -2,13 +2,13 @@
 
 namespace spec\DavidGarciaCat\NetworkBundle\URL;
 
+use DavidGarciaCat\NetworkBundle\URL\URLInterface;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class URLSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    function it_should_implement_URLInterface()
     {
-        $this->shouldHaveType('DavidGarciaCat\NetworkBundle\URL\URL');
+        $this->shouldImplement(URLInterface::class);
     }
 }
