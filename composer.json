@@ -1,36 +1,29 @@
-{
-    "name": "DavidGarciaCat/Network",
-    "description": "Set of network tools, based on PEAR PHP extensions, but developed using standard PHP.",
-    "type": "library",
-    "license": "MIT",
-    "homepage": "https://www.davidgarcia.cat",
-    "authors": [
-        {
-            "name": "David Garcia",
-            "email": "me@davidgarcia.cat"
-        }
-    ],
-    "autoload": {
-        "psr-4": {
-            "DavidGarciaCat\\": "src/DavidGarciaCat/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Tests\\": "tests/"
-        }
-    },
-    "require": {
-        "php": ">=5.5.9"
-    },
-    "require-dev": {
-        "phpspec/phpspec": "^2.5",
-        "henrikbjorn/phpspec-code-coverage": "^2.1"
-    },
-    "config": {
-        "platform": {
-            "php": "5.5.9"
-        }
-    },
-    "minimum-stability": "stable"
+  {
+  "name": "david-garcia-cat/network-bundle",
+  "description": "Set of reusable network tools, based on PEAR PHP extensions, but developed using standard PHP.",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "David Garcia",
+      "email": "me@davidgarcia.cat"
+    }
+  ],
+  "autoload": {
+    "psr-0": {
+      "": "src"
+    }
+  },
+  "require": {
+    "php": ">=5.5.9",
+    "symfony/framework-bundle": ">=2.3"
+  },
+  "require-dev": {
+    "phpspec/phpspec": "^2.5",
+    "henrikbjorn/phpspec-code-coverage": "^2.1"
+  },
+  "config": {
+    "bin-dir": "bin"
+  },
+  "minimum-stability": "stable"
 }
