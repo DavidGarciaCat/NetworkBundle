@@ -1,5 +1,5 @@
   {
-  "name": "david-garcia-cat/network-bundle",
+  "name": "davidgarciacat/network-polyfill",
   "description": "Set of reusable network tools, based on PEAR PHP extensions, but developed using standard PHP.",
   "type": "library",
   "license": "MIT",
@@ -10,13 +10,17 @@
     }
   ],
   "autoload": {
-    "psr-0": {
-      "": "src"
+    "psr-4": {
+      "DavidGarciaCat\\NetworkPolyfill\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "spec\\DavidGarciaCat\\NetworkPolyfill\\": "spec/"
     }
   },
   "require": {
-    "php": ">=5.5.9",
-    "symfony/framework-bundle": ">=2.3"
+    "php": ">=5.5.9"
   },
   "require-dev": {
     "phpspec/phpspec": "^2.5",
