@@ -8,6 +8,13 @@ This is a set of reusable network tools, based on PEAR PHP extensions, but writt
 ![PHP 5.5](https://img.shields.io/badge/PHP-5.6-8892bf.svg)
 ![PHP 5.5](https://img.shields.io/badge/PHP-7.0-8892bf.svg)
 
+## Install
+
+Just run this Composer command from your command line:
+```
+$ composer require davidgarciacat/network-polyfill
+```
+
 ## Change Log
 
 ### v1.0.0
