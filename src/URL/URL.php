@@ -418,20 +418,25 @@ class URL implements URLInterface
     {
         $path = explode('/', str_replace('//', '/', $path));
 
-        for ($i = 0; $i < count($path); $i++) {
+        $countPath = count($path);
+
+        for ($i = 0; $i < $countPath; $i++) {
             if ('.' === $path[$i]) {
                 unset($path[$i]);
                 $path = array_values($path);
                 $i--;
+                $countPath = count($path);
             } elseif ('..' === $path[$i] && ($i > 1 || ($i == 1 && '' !== $path[0]))) {
                 unset($path[$i]);
                 unset($path[$i-1]);
                 $path = array_values($path);
                 $i -= 2;
+                $countPath = count($path);
             } elseif ('..' === $path[$i] && 1 === $i && '' === $path[0]) {
                 unset($path[$i]);
                 $path = array_values($path);
                 $i--;
+                $countPath = count($path);
             } else {
                 continue;
             }
