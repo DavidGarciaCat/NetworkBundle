@@ -322,7 +322,7 @@ class URL implements URLInterface
             $host = !empty($host) ? $host : (isset($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : 'localhost');
             $port = !empty($port) ? $port : (isset($_SERVER['SERVER_PORT']) ? $_SERVER['SERVER_PORT'] : $this->getStandardPort($protocol));
             $path = (isset($_SERVER['PHP_SELF']) ? $_SERVER['PHP_SELF'] : '/');
-            $queryString = isset($_SERVER['QUERY_STRING']) ? $this->parseRawQueryString($_SERVER['QUERY_STRING']) : [];
+            $queryString = isset($_SERVER['QUERY_STRING']) ? $this->parseRawQueryString($_SERVER['QUERY_STRING']) : array();
 
             $this->host = $host;
             $this->port = $port;
