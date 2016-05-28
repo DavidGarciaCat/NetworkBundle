@@ -12,7 +12,7 @@
  * @version 1.0.0
  */
 
-namespace DavidGarciaCat\NetworkBundle\URL;
+namespace DavidGarciaCat\NetworkPolyfill\URL;
 
 /**
  * Class URL.

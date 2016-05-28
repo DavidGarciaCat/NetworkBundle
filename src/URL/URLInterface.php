@@ -6,7 +6,7 @@
  * @author David Garcia <me@davidgarcia.cat>
  */
 
-namespace DavidGarciaCat\NetworkBundle\URL;
+namespace DavidGarciaCat\NetworkPolyfill\URL;
 
 /**
  * Interface URLInterface.
