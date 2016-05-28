@@ -1,6 +1,7 @@
 suites:
   davidgarciacat_suite:
-    namespace: DavidGarciaCat
+    namespace: DavidGarciaCat\NetworkPolyfill
+    psr4_prefix: DavidGarciaCat\NetworkPolyfill
 
 extensions:
   - PhpSpec\Extension\CodeCoverageExtension
@@ -12,3 +13,4 @@ code_coverage:
   output:
     html: coverage
     clover: coverage.xml
+
