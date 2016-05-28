@@ -65,20 +65,12 @@ class URL implements URLInterface
     private $anchor;
 
     /**
-     * @var bool
-     */
-    private $useBrackets;
-
-    /**
      * URL constructor.
      *
      * @param string|null $url
-     * @param bool        $useBrackets
      */
-    public function __construct($url = null, $useBrackets = true)
+    public function __construct($url = null)
     {
-        $this->useBrackets = $useBrackets;
-
         if (!empty($url) && is_string($url)) {
             $this->parseUrl($url);
         }
