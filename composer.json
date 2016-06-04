@@ -1,4 +1,4 @@
-  {
+{
   "name": "davidgarciacat/network-polyfill",
   "description": "Set of reusable network tools, based on PEAR PHP extensions, but developed using standard PHP.",
   "type": "library",
@@ -20,7 +20,9 @@
     }
   },
   "require": {
-    "php": ">=5.5.9"
+    "php": ">=5.5.9",
+    "pear/net_dns2": "^1.4",
+    "s1lentium/iptools": "^1.0"
   },
   "require-dev": {
     "phpspec/phpspec": "^2.5",
