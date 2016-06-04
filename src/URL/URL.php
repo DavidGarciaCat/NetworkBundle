@@ -4,14 +4,11 @@
  * URL class that handles the provided URL to be used as an object.
  *
  * @author David Garcia <me@davidgarcia.cat>
- *
  * @copyright 2016 David Garcia
- *
  * @license https://opensource.org/licenses/MIT MIT
  *
  * @version 1.0.0
  */
-
 namespace DavidGarciaCat\NetworkPolyfill\URL;
 
 /**
@@ -57,7 +54,7 @@ class URL implements URLInterface
     /**
      * @var array
      */
-    private $queryString = array();
+    private $queryString = [];
 
     /**
      * @var string
@@ -104,7 +101,7 @@ class URL implements URLInterface
     public function getUrl()
     {
         if (empty($this->url)) {
-            return null;
+            return;
         }
 
         $queryString = $this->getRawQueryString();
@@ -126,7 +123,7 @@ class URL implements URLInterface
      */
     public function setProtocol($protocol, $port = null)
     {
-        $port = (!is_null($port) && is_integer($port)) ?
+        $port = (!is_null($port) && is_int($port)) ?
             $port :
             $this->getStandardPort($protocol);
 
@@ -252,7 +249,7 @@ class URL implements URLInterface
         if ($preEncoded) {
             $this->queryString[$key] = $value;
         } else {
-            $this->queryString[$key] = is_array($value) ? array_map('rawurlencode', $value): rawurlencode($value);
+            $this->queryString[$key] = is_array($value) ? array_map('rawurlencode', $value) : rawurlencode($value);
         }
 
         return $this;
@@ -396,9 +393,9 @@ class URL implements URLInterface
                 return 110;
             case 'pop3s':
                 return 995;
-            default:
-                return null;
         }
+
+        return;
     }
 
     /**
@@ -428,7 +425,7 @@ class URL implements URLInterface
                 $countPath = count($path);
             } elseif ('..' === $path[$i] && ($i > 1 || ($i == 1 && '' !== $path[0]))) {
                 unset($path[$i]);
-                unset($path[$i-1]);
+                unset($path[$i - 1]);
                 $path = array_values($path);
                 $i -= 2;
                 $countPath = count($path);

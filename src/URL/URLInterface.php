@@ -5,7 +5,6 @@
  *
  * @author David Garcia <me@davidgarcia.cat>
  */
-
 namespace DavidGarciaCat\NetworkPolyfill\URL;
 
 /**
