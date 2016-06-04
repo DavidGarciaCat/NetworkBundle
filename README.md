@@ -16,7 +16,24 @@ Just run this Composer command from your command line:
 $ composer require davidgarciacat/network-polyfill
 ```
 
+## Usage and examples
+
+Please check the [Wiki Page](https://github.com/DavidGarciaCat/network-polyfill/wiki) of this project
+
 ## Change Log
+
+### v1.1.0
+
+**DNS Black List**
+
+Check if the given domain is black listed. This process will check (recursively) all IP Addresses for the given domain:
+- A record
+- MX records
+- SPF included domains and IPv4 Addresses
+
+**DNS**
+
+`pear/net_dns2` DNS Resolver package has been included to this release in order to be able to check all DNS Black Lists. If you know how to use this powerful tool, you should be able to use it. Enjoy!
 
 ### v1.0.0
 
@@ -29,18 +46,6 @@ Parse a given URL to be managed as an object
 **Check IP**
 
 Easy way to check, verify and validate the given IP Address
-
-**DNS**
-
-DNS Resolver to check the given domain using different Name Servers
-
-**DNS Black List**
-
-Check if the given domain is black listed. This process will check (recursivelly) all IP Addresses for the given domain:
-- A record
-- MX records
-- SPF included domains
-- SPF included IP Addresses
 
 **GeoIP**
 
