@@ -304,7 +304,7 @@ class DNSBL
                         if (preg_match('/include\:(.+)/', $explode)) {
                             $include = explode(':', $explode)[1];
 
-                            $this->parseDnsRecords($include);
+                            $this->parseSpfDnsRecords($include);
                         }
 
                         if (preg_match('/ip4\:(.+)/', $explode)) {
@@ -317,7 +317,7 @@ class DNSBL
                             $network = Network::parse($host.'/'.$mask);
 
                             foreach ($network as $ip) {
-                                $this->parseDnsRecords((string) $ip);
+                                $this->parseADnsRecords((string) $ip);
                             }
                         }
                     }
