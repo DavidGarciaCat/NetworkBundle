@@ -1,17 +1,16 @@
 <?php
 
 /**
- * URL class that handles the provided URL to be used as an object.
+ * DNS Black List class that checks the provided domain in order to
+ * get all A, MX and SPF IPv4 and domain addresses. Then checks all
+ * these hosts on 5 known blacklist databases.
  *
  * @author David Garcia <me@davidgarcia.cat>
- *
  * @copyright 2016 David Garcia
- *
  * @license https://opensource.org/licenses/MIT MIT
  *
  * @version 1.0.0
  */
-
 namespace DavidGarciaCat\NetworkPolyfill\DNSBL;
 
 use IPTools\Network;
@@ -44,7 +43,8 @@ class DNSBL
     /**
      * Contains all details we may need after check each host for each blacklist. Format:
      * [
-     *     "ip_address" => [
+     *     "long_ip_address" => [
+     *         "ip_address" => "aaa.bbb.ccc.ddd",
      *         "dns" => "Reverse IP Address DNS Name",
      *         "blacklisted" => true,
      *         "blacklists" => [
@@ -219,7 +219,9 @@ class DNSBL
         }
 
         if ($this->isIpAddress($domain)) {
-            $this->hosts[] = $domain;
+            if (!in_array($domain, $this->hosts)) {
+                $this->hosts[ip2long($domain)] = $domain;
+            }
         } else {
             if (!checkdnsrr($domain, 'ANY')) {
                 throw new \InvalidArgumentException('Provided `domain` must be a valid DNS');
@@ -228,13 +230,13 @@ class DNSBL
             $aRecords = dns_get_record($domain, DNS_A);
 
             foreach ($aRecords as $dnsRecord) {
-                if (key_exists('ip', $dnsRecord) && !in_array($dnsRecord['ip'], $this->hosts)) {
-                    $this->hosts[] = $dnsRecord['ip'];
+                if (array_key_exists('ip', $dnsRecord) && !in_array($dnsRecord['ip'], $this->hosts)) {
+                    $this->hosts[ip2long($dnsRecord['ip'])] = $dnsRecord['ip'];
                 }
             }
         }
 
-        sort($this->hosts);
+        ksort($this->hosts);
 
         return $this;
     }
@@ -253,7 +255,9 @@ class DNSBL
         }
 
         if ($this->isIpAddress($domain)) {
-            $this->hosts[] = $domain;
+            if (!in_array($domain, $this->hosts)) {
+                $this->hosts[ip2long($domain)] = $domain;
+            }
         } else {
             if (!checkdnsrr($domain, 'ANY')) {
                 throw new \InvalidArgumentException('Provided `domain` must be a valid DNS');
@@ -262,13 +266,13 @@ class DNSBL
             $mxRecords = dns_get_record($domain, DNS_MX);
 
             foreach ($mxRecords as $dnsRecord) {
-                if (key_exists('host', $dnsRecord)) {
-                    $this->parseADnsRecords($dnsRecord['host']);
+                if (array_key_exists('target', $dnsRecord)) {
+                    $this->parseADnsRecords($dnsRecord['target']);
                 }
             }
         }
 
-        sort($this->hosts);
+        ksort($this->hosts);
 
         return $this;
     }
@@ -287,7 +291,9 @@ class DNSBL
         }
 
         if ($this->isIpAddress($domain)) {
-            $this->hosts[] = $domain;
+            if (!in_array($domain, $this->hosts)) {
+                $this->hosts[ip2long($domain)] = $domain;
+            }
         } else {
             if (!checkdnsrr($domain, 'ANY')) {
                 throw new \InvalidArgumentException('Provided `domain` must be a valid DNS');
@@ -296,7 +302,7 @@ class DNSBL
             $txtRecords = dns_get_record($domain, DNS_TXT);
 
             foreach ($txtRecords as $dnsRecord) {
-                if (key_exists('txt', $dnsRecord) && preg_match('/spf1/', $dnsRecord['txt'])) {
+                if (array_key_exists('txt', $dnsRecord) && preg_match('/spf1/', $dnsRecord['txt'])) {
                     $dnsRecord = preg_replace('/\s+/', ' ', $dnsRecord['txt']);
                     $explodes = explode(' ', $dnsRecord);
 
@@ -325,6 +331,8 @@ class DNSBL
             }
         }
 
+        ksort($this->hosts);
+
         return $this;
     }
 
@@ -338,10 +346,11 @@ class DNSBL
         $dnsResolver = new \Net_DNS2_Resolver();
 
         foreach ($this->hosts as $ipAddress) {
-            $this->results[$ipAddress] = [
-                'dns' => gethostbyaddr($ipAddress),
+            $this->results[ip2long($ipAddress)] = [
+                'ip_address'  => $ipAddress,
+                'dns'         => gethostbyaddr($ipAddress),
                 'blacklisted' => false,
-                'blacklists' => [],
+                'blacklists'  => [],
             ];
 
             foreach ($this->blacklists as $blacklist) {
@@ -357,21 +366,21 @@ class DNSBL
                     if ($response) {
                         $this->totalBlacklists += 1;
 
-                        $this->results[$ipAddress]['blacklisted'] = true;
-                        $this->results[$ipAddress]['blacklists'][$blacklist] = true;
+                        $this->results[ip2long($ipAddress)]['blacklisted'] = true;
+                        $this->results[ip2long($ipAddress)]['blacklists'][$blacklist] = true;
                     } else {
-                        $this->results[$ipAddress]['blacklists'][$blacklist] = false;
+                        $this->results[ip2long($ipAddress)]['blacklists'][$blacklist] = false;
                     }
                 } catch (\Net_DNS2_Exception $exception) {
                     // The \Net_DNS2_Resolver->query() may throw a \Net_DNS2_Exception Exception
                     // when we get no response from blacklist:
                     // "DNS request failed: The domain name referenced in the query does not exist."
-                    $this->results[$ipAddress]['blacklists'][$blacklist] = false;
+                    $this->results[ip2long($ipAddress)]['blacklists'][$blacklist] = false;
                 }
             }
         }
 
-        echo json_encode($this->results) . PHP_EOL . PHP_EOL;
+        ksort($this->results);
 
         return $this;
     }
