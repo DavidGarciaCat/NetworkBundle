@@ -377,13 +377,53 @@ class DNSBL
     }
 
     /**
+     * Returns an associative array with all information we have got checking all ip addresses.
+     *
+     * @return array
+     */
+    public function getResults()
+    {
+        return $this->results;
+    }
+
+    /**
+     * Returns the number of checks that we have processed.
+     *
+     * @return int
+     */
+    public function getTotalChecks()
+    {
+        return $this->totalChecks;
+    }
+
+    /**
+     * Returns the number of times we have found an IP Address blacklisted.
+     *
+     * @return int
+     */
+    public function getTotalBlacklists()
+    {
+        return $this->totalBlacklists;
+    }
+
+    /**
+     * Returns the percentage of options to be flagged as SPAM by the recipient's Mail Server.
+     *
+     * @return float
+     */
+    public function getBlacklistPercentage()
+    {
+        return $this->totalBlacklists / $this->totalChecks * 100;
+    }
+
+    /**
      * Checks if the provided string is a valid IPv4 Address.
      *
      * @param string $ipAddress
      *
      * @return bool
      */
-    public function isIpAddress($ipAddress)
+    private function isIpAddress($ipAddress)
     {
         if (empty($ipAddress)) {
             return false;
@@ -418,7 +458,7 @@ class DNSBL
      *
      * @return string
      */
-    public function reverseIp($ipAddress)
+    private function reverseIp($ipAddress)
     {
         if ($this->isIpAddress($ipAddress)) {
             return implode('.', array_reverse(explode('.', $ipAddress)));
