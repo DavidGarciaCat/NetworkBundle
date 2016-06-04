@@ -1,9 +1,24 @@
 <?php
 
+/**
+ * URL class that handles the provided URL to be used as an object.
+ *
+ * @author David Garcia <me@davidgarcia.cat>
+ *
+ * @copyright 2016 David Garcia
+ *
+ * @license https://opensource.org/licenses/MIT MIT
+ *
+ * @version 1.0.0
+ */
+
 namespace DavidGarciaCat\NetworkPolyfill\DNSBL;
 
 use IPTools\Network;
 
+/**
+ * Class DNSBL.
+ */
 class DNSBL
 {
     const DNSBL_BARRACUDA_CENTRAL = 'b.barracudacentral.org';
