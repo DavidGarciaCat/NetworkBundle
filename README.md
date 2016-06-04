@@ -5,9 +5,9 @@ This is a set of reusable network tools, based on PEAR PHP extensions, but writt
 [![License](https://poser.pugx.org/davidgarciacat/network-polyfill/license)](https://packagist.org/packages/davidgarciacat/network-polyfill)
 [![Build Status](https://travis-ci.org/DavidGarciaCat/network-polyfill.svg?branch=master)](https://travis-ci.org/DavidGarciaCat/network-polyfill)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/f86840c9-b589-40d0-9fe9-7705082b34f0/mini.png)](https://insight.sensiolabs.com/projects/f86840c9-b589-40d0-9fe9-7705082b34f0)
-![PHP 5.5](https://img.shields.io/badge/PHP-5.5-8892bf.svg)
-![PHP 5.5](https://img.shields.io/badge/PHP-5.6-8892bf.svg)
-![PHP 5.5](https://img.shields.io/badge/PHP-7.0-8892bf.svg)
+[![PHP 5.5](https://img.shields.io/badge/PHP-5.5-8892bf.svg)](https://packagist.org/packages/davidgarciacat/network-polyfill)
+[![PHP 5.5](https://img.shields.io/badge/PHP-5.6-8892bf.svg)](https://packagist.org/packages/davidgarciacat/network-polyfill)
+[![PHP 5.5](https://img.shields.io/badge/PHP-7.0-8892bf.svg)](https://packagist.org/packages/davidgarciacat/network-polyfill)
 
 ## Install
 
